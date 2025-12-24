@@ -102,7 +102,7 @@ const skills = {
 const education = [
   {
     degree: "M.Sc. Hydro Science & Engineering",
-    school: "TU Dresden",
+    school: "TU Dresden, Germany",
     details:
       "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach (Supervisor: Dr. Sujit Kumar Sikder, IOER).",
   },
