@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,8 +5,25 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { DividerHorizontalIcon, GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
-import { Mail, Phone, MapPin, Download, ExternalLink, Moon, Sun, GraduationCap, Building2, Calendar, Globe2, Newspaper, Sparkles, Layers, Database, GitBranch, Cpu, ChartLine } from "lucide-react";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Download,
+  ExternalLink,
+  Moon,
+  Sun,
+  GraduationCap,
+  Building2,
+  Calendar,
+  Globe2,
+  Newspaper,
+  Sparkles,
+  Layers,
+  Cpu,
+  ChartLine,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 // --- Editable data ---------------------------------------------------------
@@ -21,35 +37,103 @@ const profile = {
   phone: "+49 178 918 5535",
   github: "https://github.com/Sukanto54cl",
   linkedin: "https://www.linkedin.com/in/sukanto-das/",
-  resumeUrl: "#", // replace with actual PDF link
+  resumeUrl: "/cv_sukanto_das.pdf", // replace with actual PDF link
 };
 
 const skills = {
-  "Programming & Analysis": ["Python", "R", "SQL", "bash", "CDO"],
-  "Big Data & Systems": ["PySpark", "Apache Sedona", "DuckDB", "PostgreSQL"],
-  "ML & NLP": ["Topic Modeling (LDA)", "Doc2Vec", "Gensim", "scikit-learn"],
-  "Remote Sensing & GIS": ["ArcGIS", "QGIS", "ENVI", "ERDAS Imagine", "ILWIS", "Google Earth Engine"],
-  "Visualization": ["Matplotlib", "Seaborn", "Plotly", "Folium", "Streamlit", "Power BI"],
-  "Geospatial Python": ["GeoPandas", "Rasterio", "Shapely", "OSMnx", "Overpy"],
-  "Tools": ["Git & GitHub", "VS Code", "Spyder", "Jupyter", "Adobe Illustrator"],
-};
+    "Data Engineering (Python & SQL)": [
+      "ETL pipelines",
+      "Workflow automation",
+      "Reproducible processing",
+      "Data modeling",
+      "Unit-tested analytics",
+      "API ingestion",
+    ],
+    "Geospatial ETL & Operations": [
+      "GeoPandas",
+      "Rasterio",
+      "Shapely",
+      "GDAL",
+      "PostGIS",
+      "DuckDB",
+      "Geospatial QA/QC",
+      "Batch processing",
+    ],
+    "Remote Sensing": [
+      "Sentinel-2",
+      "Landsat",
+      "LULC classification",
+      "Change detection",
+      "Preprocessing",
+      "Feature extraction",
+    ],
+    "Feasibility & Operational Analysis": [
+      "Spatial/temporal feasibility",
+      "Accessibility analysis",
+      "Pattern-of-life",
+      "Mobility mapping",
+      "Demand mapping",
+    ],
+    "Visualization & Monitoring": [
+      "Streamlit",
+      "Plotly",
+      "Power BI",
+      "ArcGIS Online",
+      "Operational dashboards",
+      "Decision support",
+    ],
+    "CI/CD & Version Control": [
+      "Git",
+      "GitHub Actions (familiar)",
+      "Testing",
+      "Documentation",
+      "Reproducible workflows",
+    ],
+    "GIS Software & Tools": [
+      "QGIS",
+      "ArcGIS Pro / ModelBuilder",
+      "OSMnx",
+      "Overpy",
+      "FAIR metadata",
+      "SOP development",
+    ],
+  };
+  
 
 const education = [
   {
-    degree: "M.Sc. Hydro Science & Engineering (expected Dec 2025)",
-    school: "TU Dresden",
+    degree: "M.Sc. Hydro Science & Engineering (2025)",
+    school: "TU Dresden, Germany",
     details:
-      "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach (Supervisor: Dr. Sujit Kumar Sikder, IOER).",
+      "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach",
   },
   {
-    degree: "B.URP Urban & Regional Planning (2016)",
+    degree: "Bachelor of Urban & Regional Planning (2016)",
     school: "KUET, Bangladesh",
     details:
-      "Thesis: Coastal Livelihood vs. Landuse/Landcover Change Modeling (Sharankhola, Bagerhat).",
+      "Thesis: Investigating the Coastal Livelihood in Relation to Land Use–Land Cover Change Modeling: A Case Study of Sharankhola, Bagerhat",
   },
 ];
 
 const projects = [
+  {
+    title: "Urban Public Transit Frequency Indicator for Germany",
+    org: "IOER Research Data Center",
+    dates: "2023 – 2025",
+    blurb:
+      "Built an end-to-end geospatial ETL pipeline to generate nationwide public transit frequency indicators using GTFS, OSM, and INSPIRE grids. Implemented spatio-temporal aggregation, network-based accessibility modeling, and rigorous QA/QC.",
+    stack: [
+      "Python",
+      "GTFS",
+      "OSM",
+      "INSPIRE grid",
+      "GeoPandas",
+      "PostGIS",
+      "Network analysis",
+      "ETL pipelines",
+    ],
+    link: "https://doi.org/10.71830/ABPCUS",
+  },
   {
     title: "Geo‑Semantic Urban Fabrics for Net‑Zero Interventions",
     org: "Leibniz Institute of Ecological Urban and Regional Development (IOER)",
@@ -68,14 +152,6 @@ const projects = [
     stack: ["QGIS", "GeoPandas", "Rasterio", "Plotly", "Seaborn", "Matplotlib", "OWSLib", "OSMnx", "Overpy", "GEE"],
   },
   {
-    title: "Transit Visualization & Processing (GTFS)",
-    org: "IOER",
-    dates: "Jun 2023 – Dec 2024",
-    blurb:
-      "Automated GTFS workflows (QGIS model builder), data cleaning with GeoPandas, Streamlit dashboard; OpenRouteService API integration.",
-    stack: ["QGIS", "GeoPandas", "Plotly", "Streamlit", "OpenRouteService"],
-  },
-  {
     title: "Climate Extremes in Sudan (CORDEX Ensemble)",
     org: "TU Dresden",
     dates: "Apr 2023 – Sep 2023",
@@ -85,47 +161,14 @@ const projects = [
   },
 ];
 
-const experience = [
-  {
-    role: "Wissenschaftliche Hilfskraft (Working Student)",
-    org: "IOER, Dresden",
-    dates: "Jun 2023 – Apr 2025",
-    bullets: [
-      "Large geospatial data analysis and automated model building",
-      "Geospatial statistics with Python; dashboards; Git repo hygiene",
-    ],
-  },
-  {
-    role: "Water Data Visualization (Volunteer)",
-    org: "Water Science Policy, Munich",
-    dates: "Jan 2023 – May 2023",
-    bullets: ["Story development, data cleaning/analysis/visualization, geospatial mapping"],
-  },
-  {
-    role: "Data Management Officer",
-    org: "Wildlife Conservation Society, Dhaka",
-    dates: "Apr 2022 – Sep 2022",
-    bullets: [
-      "Data collection and quality checks, tool development, statistical reporting",
-      "DB maintenance and spatial mapping",
-    ],
-  },
-  {
-    role: "Senior Information Management Officer",
-    org: "iMMAP, Cox’s Bazar",
-    dates: "May 2021 – Dec 2021",
-    bullets: [
-      "Produced info products (reports, maps), coverage analysis, data viz, DB management",
-    ],
-  },
-  {
-    role: "GIS Officer",
-    org: "Danish Refugee Council, Cox’s Bazar",
-    dates: "Oct 2020 – May 2021",
-    bullets: [
-      "Map design, data tools, DB admin, trainings, LULC mapping, reporting",
-    ],
-  },
+const interests = [
+  "GeoAI & geospatial analytics",
+  "AI for Earth observation",
+  "Urban sustainability & net-zero interventions",
+  "Remote sensing for climate risk",
+  "Spatial data engineering & reproducible pipelines",
+  "OpenStreetMap / open data ecosystems",
+  "Public transport & accessibility analytics",
 ];
 
 const publications = [
@@ -140,13 +183,20 @@ const publications = [
 ];
 
 const certs = [
-  {
-    title: "AI School on Scalable Data Analytics and HPC",
-    org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
-    year: "2024",
-    note: "ML pipelines, AI on HPC clusters, hackathon geospatial analysis",
-  },
-];
+    {
+      title: "AI School on Scalable Data Analytics & HPC",
+      org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
+      year: "2023",
+      note: "ML pipelines, visualization, and AI deployment on HPC clusters",
+    },
+    {
+      title: "AI School on Deep Learning, Data Visualization & LLMs",
+      org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
+      year: "2025",
+      note: "Data wrangling, deep learning, LLMs, and visualization using JupyterHub on HPC",
+    },
+  ];
+  
 
 // --- Helpers ----------------------------------------------------------------
 function useDarkMode() {
@@ -231,14 +281,16 @@ export default function Portfolio() {
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="md:col-span-2">
             <Card className="rounded-2xl overflow-hidden">
               <CardContent className="p-6">
-                <div className="aspect-square rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/10 grid place-items-center text-6xl font-black">
-                  SD
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500/20 to-cyan-500/10">
+                  <img
+                    src="/sukanto_das.jpg"
+                    alt="Sukanto Das"
+                    className="w-full h-full object-contain bg-slate-900"
+                  />
                 </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {["Python", "GeoPandas", "OSMnx", "Gensim", "DuckDB", "Sedona", "QGIS"].map((s) => (
-                    <Pill key={s}>{s}</Pill>
-                  ))}
-                </div>
+                <p className="mt-4 text-sm text-slate-400 text-center">
+                  Data Engineer focused on climate, geospatial, remote sensing, and sustainability
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -296,31 +348,26 @@ export default function Portfolio() {
         </div>
       </Section>
 
-      {/* Experience & Education */}
-      <Section id="experience" title="Experience & Education" icon={<ChartLine className="w-6 h-6" />}>
-        <Tabs defaultValue="exp" className="w-full">
+      {/* Interests & Education */}
+      <Section id="interests" title="Interests & Education" icon={<ChartLine className="w-6 h-6" />}>
+        <Tabs defaultValue="interests" className="w-full">
           <TabsList className="rounded-2xl">
-            <TabsTrigger value="exp">Experience</TabsTrigger>
+            <TabsTrigger value="interests">Interests</TabsTrigger>
             <TabsTrigger value="edu">Education</TabsTrigger>
           </TabsList>
-          <TabsContent value="exp" className="mt-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              {experience.map((e) => (
-                <Card key={e.role} className="rounded-2xl">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg">{e.role}</CardTitle>
-                    <div className="text-sm text-slate-500 dark:text-slate-400">{e.org} • {e.dates}</div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="list-disc pl-5 space-y-1">
-                      {e.bullets.map((b, i) => (
-                        <li key={i}>{b}</li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <TabsContent value="interests" className="mt-4">
+            <Card className="rounded-2xl">
+              <CardContent className="p-6">
+                <div className="flex flex-wrap gap-2">
+                  {interests.map((it) => (
+                    <Pill key={it}>{it}</Pill>
+                  ))}
+                </div>
+                <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
+                  I enjoy building reliable data pipelines and spatial models that turn complex geospatial and Earth observation data into decision-ready insights.
+                </p>
+              </CardContent>
+            </Card>
           </TabsContent>
           <TabsContent value="edu" className="mt-4">
             <div className="grid md:grid-cols-2 gap-4">
