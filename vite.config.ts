@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 
 export default defineConfig({
-  base: "/portfolio/", // Set the base path for GitHub Pages
+  base: "/portfolio/",   // 👈 REQUIRED for GitHub Pages
   plugins: [react()],
   resolve: {
     alias: {
