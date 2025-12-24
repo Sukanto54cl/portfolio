@@ -31,7 +31,7 @@ const profile = {
   name: "Sukanto Das",
   tagline: "Geospatial Programmer • Environmental Data Analyst",
   summary:
-    "Data engineer with over six years of experience building reliable, reproducible data pipelines across geospatial, environmental, and remote sensing domains. Strong background in Python and SQL, spatial ETL, and scalable data processing. Interested in applying data engineering practices to climate, urban systems, and sustainability-focused problems.",
+    "Data engineer with the experience of building reliable, reproducible data pipelines across geospatial, environmental, and remote sensing domains. Strong background in Python and SQL, spatial ETL, and scalable data processing. Interested in applying data engineering practices to climate, urban systems, and sustainability-focused problems.",
   location: "Dresden, Germany",
   email: "sukantodas1993@gmail.com",
   phone: "+49 178 918 5535",
