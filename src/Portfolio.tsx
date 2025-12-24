@@ -31,7 +31,7 @@ const profile = {
   name: "Sukanto Das",
   tagline: "Geospatial Programmer • Environmental Data Analyst",
   summary:
-    "Spatial data analyst & researcher with 6+ years across geospatial processing, Earth observation, and scalable environmental modeling. Currently finishing an MSc in Hydro Science & Engineering (TU Dresden). Thesis explores geo-semantic urban classification with NLP and topic modeling to support net‑zero interventions.",
+    "Data engineer with over six years of experience building reliable, reproducible data pipelines across geospatial, environmental, and remote sensing domains. Strong background in Python and SQL, spatial ETL, and scalable data processing. Interested in applying data engineering practices to climate, urban systems, and sustainability-focused problems.",
   location: "Dresden, Germany",
   email: "sukantodas1993@gmail.com",
   phone: "+49 178 918 5535",
@@ -443,7 +443,7 @@ export default function Portfolio() {
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold">Let’s build climate‑positive cities with data</h3>
-                <p className="text-slate-600 dark:text-slate-300 mt-2">Email me or connect via LinkedIn/GitHub. I’m open to geospatial, data science, and urban sustainability roles.</p>
+                <p className="text-slate-600 dark:text-slate-300 mt-2">Email me or connect via LinkedIn/GitHub. I’m open to geospatial, data engineering, and urban sustainability roles.</p>
                 <div className="mt-4 space-y-2 text-sm">
                   <div className="flex items-center gap-2"><Mail className="w-4 h-4" /><a className="hover:underline" href={`mailto:${profile.email}`}>{profile.email}</a></div>
                   <div className="flex items-center gap-2"><LinkedInLogoIcon className="w-4 h-4" /><a className="hover:underline" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></div>
