@@ -171,6 +171,7 @@ const projects = [
 
 const interests = [
   "GeoAI & geo-semantic modeling",
+  "AI for Earth observation",
   "Urban sustainability & net-zero interventions",
   "Remote sensing for climate risk",
   "Spatial data engineering & reproducible pipelines",
