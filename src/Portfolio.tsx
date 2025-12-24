@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -41,77 +41,76 @@ const profile = {
 };
 
 const skills = {
-    "Data Engineering (Python & SQL)": [
-      "ETL pipelines",
-      "Workflow automation",
-      "Reproducible processing",
-      "Data modeling",
-      "Unit-tested analytics",
-      "API ingestion",
-    ],
-    "Geospatial ETL & Operations": [
-      "GeoPandas",
-      "Rasterio",
-      "Shapely",
-      "GDAL",
-      "PostGIS",
-      "DuckDB",
-      "Geospatial QA/QC",
-      "Batch processing",
-    ],
-    "Remote Sensing": [
-      "Sentinel-2",
-      "Landsat",
-      "LULC classification",
-      "Change detection",
-      "Preprocessing",
-      "Feature extraction",
-    ],
-    "Feasibility & Operational Analysis": [
-      "Spatial/temporal feasibility",
-      "Accessibility analysis",
-      "Pattern-of-life",
-      "Mobility mapping",
-      "Demand mapping",
-    ],
-    "Visualization & Monitoring": [
-      "Streamlit",
-      "Plotly",
-      "Power BI",
-      "ArcGIS Online",
-      "Operational dashboards",
-      "Decision support",
-    ],
-    "CI/CD & Version Control": [
-      "Git",
-      "GitHub Actions (familiar)",
-      "Testing",
-      "Documentation",
-      "Reproducible workflows",
-    ],
-    "GIS Software & Tools": [
-      "QGIS",
-      "ArcGIS Pro / ModelBuilder",
-      "OSMnx",
-      "Overpy",
-      "FAIR metadata",
-      "SOP development",
-    ],
-  };
-  
+  "Data Engineering (Python & SQL)": [
+    "ETL pipelines",
+    "Workflow automation",
+    "Reproducible processing",
+    "Data modeling",
+    "Unit-tested analytics",
+    "API ingestion",
+  ],
+  "Geospatial ETL & Operations": [
+    "GeoPandas",
+    "Rasterio",
+    "Shapely",
+    "GDAL",
+    "PostGIS",
+    "DuckDB",
+    "Geospatial QA/QC",
+    "Batch processing",
+  ],
+  "Remote Sensing": [
+    "Sentinel-2",
+    "Landsat",
+    "LULC classification",
+    "Change detection",
+    "Preprocessing",
+    "Feature extraction",
+  ],
+  "Feasibility & Operational Analysis": [
+    "Spatial/temporal feasibility",
+    "Accessibility analysis",
+    "Pattern-of-life",
+    "Mobility mapping",
+    "Demand mapping",
+  ],
+  "Visualization & Monitoring": [
+    "Streamlit",
+    "Plotly",
+    "Power BI",
+    "ArcGIS Online",
+    "Operational dashboards",
+    "Decision support",
+  ],
+  "CI/CD & Version Control": [
+    "Git",
+    "GitHub Actions (familiar)",
+    "Testing",
+    "Documentation",
+    "Reproducible workflows",
+  ],
+  "GIS Software & Tools": [
+    "QGIS",
+    "ArcGIS Pro / ModelBuilder",
+    "OSMnx",
+    "Overpy",
+    "FAIR metadata",
+    "SOP development",
+  ],
+};
 
 const education = [
   {
-    degree: "M.Sc. Hydro Science & Engineering (2025)",
-    school: "TU Dresden, Germany",
+    degree: "M.Sc. Hydro Science & Engineering (expected Dec 2025)",
+    school: "TU Dresden",
     details:
-      "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach",
+      "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach (Supervisor: Dr. Sujit Kumar Sikder, IOER).",
   },
   {
-    degree: "Bachelor of Urban & Regional Planning (2016)",
+    degree: "B.URP Urban & Regional Planning (2016)",
     school: "KUET, Bangladesh",
     details:
-      "Thesis: Investigating the Coastal Livelihood in Relation to Land Use–Land Cover Change Modeling: A Case Study of Sharankhola, Bagerhat",
+      "Thesis: Coastal Livelihood vs. Landuse/Landcover Change Modeling (Sharankhola, Bagerhat).",
   },
 ];
 
@@ -119,7 +118,7 @@ const projects = [
   {
     title: "Urban Public Transit Frequency Indicator for Germany",
     org: "IOER Research Data Center",
-    dates: "2023 – 2025",
+    dates: "2022 – 2025",
     blurb:
       "Built an end-to-end geospatial ETL pipeline to generate nationwide public transit frequency indicators using GTFS, OSM, and INSPIRE grids. Implemented spatio-temporal aggregation, network-based accessibility modeling, and rigorous QA/QC.",
     stack: [
@@ -134,6 +133,7 @@ const projects = [
     ],
     link: "https://doi.org/10.71830/ABPCUS",
   },
+
   {
     title: "Geo‑Semantic Urban Fabrics for Net‑Zero Interventions",
     org: "Leibniz Institute of Ecological Urban and Regional Development (IOER)",
@@ -152,6 +152,14 @@ const projects = [
     stack: ["QGIS", "GeoPandas", "Rasterio", "Plotly", "Seaborn", "Matplotlib", "OWSLib", "OSMnx", "Overpy", "GEE"],
   },
   {
+    title: "Transit Visualization & Processing (GTFS)",
+    org: "IOER",
+    dates: "Jun 2023 – Dec 2024",
+    blurb:
+      "Automated GTFS workflows (QGIS model builder), data cleaning with GeoPandas, Streamlit dashboard; OpenRouteService API integration.",
+    stack: ["QGIS", "GeoPandas", "Plotly", "Streamlit", "OpenRouteService"],
+  },
+  {
     title: "Climate Extremes in Sudan (CORDEX Ensemble)",
     org: "TU Dresden",
     dates: "Apr 2023 – Sep 2023",
@@ -162,8 +170,7 @@ const projects = [
 ];
 
 const interests = [
-  "GeoAI & geospatial analytics",
-  "AI for Earth observation",
+  "GeoAI & geo-semantic modeling",
   "Urban sustainability & net-zero interventions",
   "Remote sensing for climate risk",
   "Spatial data engineering & reproducible pipelines",
@@ -183,20 +190,19 @@ const publications = [
 ];
 
 const certs = [
-    {
-      title: "AI School on Scalable Data Analytics & HPC",
-      org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
-      year: "2023",
-      note: "ML pipelines, visualization, and AI deployment on HPC clusters",
-    },
-    {
-      title: "AI School on Deep Learning, Data Visualization & LLMs",
-      org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
-      year: "2025",
-      note: "Data wrangling, deep learning, LLMs, and visualization using JupyterHub on HPC",
-    },
-  ];
-  
+  {
+    title: "AI School on Scalable Data Analytics & HPC",
+    org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
+    year: "2023",
+    note: "ML pipelines, visualization, and AI deployment on HPC clusters",
+  },
+  {
+    title: "AI School on Deep Learning, Data Visualization & LLMs",
+    org: "ScaDS.AI Leipzig, Leibniz Association & IOM",
+    year: "2025",
+    note: "Data wrangling, deep learning, LLMs, and visualization using JupyterHub on HPC",
+  },
+];
 
 // --- Helpers ----------------------------------------------------------------
 function useDarkMode() {
@@ -209,7 +215,16 @@ function useDarkMode() {
   return { dark, setDark };
 }
 
-const Section = ({ id, title, icon, children }) => (
+type SectionProps = {
+  id: string;
+  title: string;
+  icon: ReactNode;
+  children: ReactNode;
+};
+
+type PillProps = { children: ReactNode };
+
+const Section = ({ id, title, icon, children }: SectionProps) => (
   <section id={id} className="scroll-mt-24 py-10">
     <div className="max-w-5xl mx-auto px-4">
       <div className="flex items-center gap-3 mb-6">
@@ -221,7 +236,7 @@ const Section = ({ id, title, icon, children }) => (
   </section>
 );
 
-const Pill = ({ children }) => (
+const Pill = ({ children }: PillProps) => (
   <Badge className="rounded-full px-3 py-1 text-sm" variant="secondary">{children}</Badge>
 );
 
