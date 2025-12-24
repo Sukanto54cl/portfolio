@@ -37,7 +37,7 @@ const profile = {
   phone: "+49 178 918 5535",
   github: "https://github.com/Sukanto54cl",
   linkedin: "https://www.linkedin.com/in/sukanto-das/",
-  resumeUrl: "/cv_sukanto_das.pdf", // replace with actual PDF link
+  resumeUrl: "/{`${import.meta.env.BASE_URL}cv_sukanto_das.pdf", // replace with actual PDF link
 };
 
 const skills = {
@@ -299,7 +299,7 @@ export default function Portfolio() {
               <CardContent className="p-6">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500/20 to-cyan-500/10">
                   <img
-                    src="/sukanto_das.jpg"
+                    src="{`${import.meta.env.BASE_URL}/sukanto_das.jpg"
                     alt="Sukanto Das"
                     className="w-full h-full object-contain bg-slate-900"
                   />
