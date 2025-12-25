@@ -104,16 +104,16 @@ const skills = {
 
 const education = [
   {
-    degree: "M.Sc. Hydro Science & Engineering",
-    school: "TU Dresden, Germany",
+    degree: "M.Sc. in Hydro Science & Engineering",
+    school: "TUD | Dresden University of Technology, Germany",
     details:
       "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach (Supervisor: Dr. Sujit Kumar Sikder, IOER).",
   },
   {
-    degree: "B.URP Urban & Regional Planning (2016)",
-    school: "KUET, Bangladesh",
+    degree: "Bachelor of Urban & Regional Planning (BURP)",
+    school: "Khulna University of Engineering & Technology (KUET), Bangladesh",
     details:
-      "Thesis: Coastal Livelihood vs. Landuse/Landcover Change Modeling (Sharankhola, Bagerhat).",
+      "Thesis: Investigating the Coastal Livelihood in relation to Land-use/Land-cover Change Modeling (LULCCM): A case study of Sharankhola, Bagerhat",
   },
 ];
 
@@ -333,7 +333,7 @@ export default function Portfolio() {
       </Section>
 
       {/* Projects */}
-      <Section id="projects" title="Selected Projects" icon={<Layers className="w-6 h-6" />}>
+      <Section id="projects" title="Featured Projects" icon={<Layers className="w-6 h-6" />}>
         <div className="grid md:grid-cols-2 gap-4">
           {projects.map((p, i) => (
             <motion.div key={p.title} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
