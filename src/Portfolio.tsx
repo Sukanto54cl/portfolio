@@ -273,7 +273,7 @@ export default function Portfolio() {
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-5 gap-8 items-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="md:col-span-3">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-              Geospatial Programming for <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">Urban Sustainability</span>
+              Sukanto Das <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">Portfolio</span>
             </h1>
             <p className="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl">
               {profile.summary}
