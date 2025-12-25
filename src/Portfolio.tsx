@@ -27,6 +27,8 @@ import {
 import { motion } from "framer-motion";
 
 // --- Editable data ---------------------------------------------------------
+const BASE_URL = import.meta.env.BASE_URL;
+
 const profile = {
   name: "Sukanto Das",
   tagline: "Geospatial Programmer • Environmental Data Analyst",
@@ -37,7 +39,8 @@ const profile = {
   phone: "+49 178 918 5535",
   github: "https://github.com/Sukanto54cl",
   linkedin: "https://www.linkedin.com/in/sukanto-das/",
-  resumeUrl: "{`${import.meta.env.BASE_URL}cv_sukanto_das.pdf", // replace with actual PDF link
+  resumeUrl: `${BASE_URL}cv_sukanto_das.pdf`,
+  photoUrl: `${BASE_URL}sukanto_das.jpg`,
 };
 
 const skills = {
@@ -299,7 +302,7 @@ export default function Portfolio() {
               <CardContent className="p-6">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500/20 to-cyan-500/10">
                   <img
-                    src="{`${import.meta.env.BASE_URL}sukanto_das.jpg"
+                    src={profile.photoUrl}
                     alt="Sukanto Das"
                     className="w-full h-full object-contain bg-slate-900"
                   />
