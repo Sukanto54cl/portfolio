@@ -31,7 +31,7 @@ const BASE_URL = import.meta.env.BASE_URL;
 
 const profile = {
   name: "Sukanto Das",
-  tagline: "Geospatial Programmer • Environmental Data Analyst",
+  tagline: "Data Engineer • Geospatial & Climate Data",
   summary:
     "Data engineer with the experience of building reliable, reproducible data pipelines across geospatial, environmental, and remote sensing domains. Strong background in Python and SQL, spatial ETL, and scalable data processing. Interested in applying data engineering practices to climate, urban systems, and sustainability-focused problems.",
   location: "Dresden, Germany",
@@ -107,7 +107,7 @@ const education = [
     degree: "M.Sc. in Hydro Science & Engineering",
     school: "TUD | Dresden University of Technology, Germany",
     details:
-      "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach (Supervisor: Dr. Sujit Kumar Sikder, IOER).",
+      "Thesis: Modeling of Urban Fabrics to Activate Net‑Zero Intervention: A Geo‑Semantic Approach",
   },
   {
     degree: "Bachelor of Urban & Regional Planning (BURP)",
@@ -367,44 +367,55 @@ export default function Portfolio() {
         </div>
       </Section>
 
-      {/* Interests & Education */}
-      <Section id="interests" title="Interests & Education" icon={<ChartLine className="w-6 h-6" />}>
-        <Tabs defaultValue="interests" className="w-full">
-          <TabsList className="rounded-2xl">
-            <TabsTrigger value="interests">Interests</TabsTrigger>
-            <TabsTrigger value="edu">Education</TabsTrigger>
-          </TabsList>
-          <TabsContent value="interests" className="mt-4">
-            <Card className="rounded-2xl">
-              <CardContent className="p-6">
-                <div className="flex flex-wrap gap-2">
-                  {interests.map((it) => (
-                    <Pill key={it}>{it}</Pill>
-                  ))}
+      
+      {/* Education & Interests */}
+    <Section id="interests" title="Education & Interests" icon={<ChartLine className="w-6 h-6" />}>
+    <Tabs defaultValue="edu" className="w-full">
+        <TabsList className="rounded-2xl">
+        <TabsTrigger value="edu">Education</TabsTrigger>
+        <TabsTrigger value="interests">Interests</TabsTrigger>
+        </TabsList>
+
+        {/* Education FIRST */}
+        <TabsContent value="edu" className="mt-4">
+        <div className="grid md:grid-cols-2 gap-4">
+            {education.map((ed) => (
+            <Card key={ed.degree} className="rounded-2xl">
+                <CardHeader className="pb-2">
+                <CardTitle className="text-lg flex items-start gap-2">
+                    <GraduationCap className="w-5 h-5 mt-0.5" />
+                    {ed.degree}
+                </CardTitle>
+                </CardHeader>
+                <CardContent>
+                <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
+                    {ed.school}
                 </div>
-                <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
-                  I enjoy building reliable data pipelines and spatial models that turn complex geospatial and Earth observation data into decision-ready insights.
-                </p>
-              </CardContent>
+                <p>{ed.details}</p>
+                </CardContent>
             </Card>
-          </TabsContent>
-          <TabsContent value="edu" className="mt-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              {education.map((ed) => (
-                <Card key={ed.degree} className="rounded-2xl">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-start gap-2"><GraduationCap className="w-5 h-5 mt-0.5" />{ed.degree}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">{ed.school}</div>
-                    <p>{ed.details}</p>
-                  </CardContent>
-                </Card>
-              ))}
+            ))}
+        </div>
+        </TabsContent>
+
+        {/* Interests SECOND */}
+        <TabsContent value="interests" className="mt-4">
+        <Card className="rounded-2xl">
+            <CardContent className="p-6">
+            <div className="flex flex-wrap gap-2">
+                {interests.map((it) => (
+                <Pill key={it}>{it}</Pill>
+                ))}
             </div>
-          </TabsContent>
-        </Tabs>
-      </Section>
+            <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
+                I enjoy building reliable data pipelines and spatial models that turn
+                complex geospatial and Earth observation data into decision-ready insights.
+            </p>
+            </CardContent>
+        </Card>
+        </TabsContent>
+    </Tabs>
+    </Section>
 
       {/* Publications & Certifications */}
       <Section id="publications" title="Publications & Certifications" icon={<Newspaper className="w-6 h-6" />}>
