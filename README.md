@@ -37,6 +37,40 @@ Detailed professional experience is intentionally kept in the downloadable CV.
 
 ---
 
+## Local Development
+
+Clone the repository and run:
+
+```bash
+npm install
+npm run dev
+```
+The site will be available at:
+
+http://localhost:5173
+
+
+---
+
+## Deloyment
+
+This project is deployed using GitHub Pages.
+
+### Build & Deploy
+
+```bash
+npm run build
+npm run deploy
+```
+
+---
+
+## License
+
+The **source code** of this project is licensed under the MIT License.
+
+The **content** of this portfolio (text, CV, images, and project descriptions) is personal and may not be reused verbatim without permission.
+
 ## 📁 Project Structure
 
 ```text
@@ -58,36 +92,3 @@ portfolio/
 └─ package.json
 
 ---
-
-## Local Development
-
-Clone the repository and run:
-
-```bash
-npm install
-npm run dev
-
-The site will be available at:
-
-```bash
-http://localhost:5173
-
----
-
-## Deloyment
-
-This project is deployed using GitHub Pages.
-
-### Build & Deploy
-
-```bash
-npm run build
-npm run deploy
-
----
-
-## License
-
-The **source code** of this project is licensed under the MIT License.
-
-The **content** of this portfolio (text, CV, images, and project descriptions) is personal and may not be reused verbatim without permission.
