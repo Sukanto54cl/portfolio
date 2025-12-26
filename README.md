@@ -1,29 +1,43 @@
 # Sukanto Das — Portfolio
 
-A  **personal portfolio website** built with **React + Vite**, styled using **Tailwind CSS** and **shadcn/ui**, with subtle animations via **Framer Motion**.
+A **personal portfolio website** built with **React + Vite**, styled using **Tailwind CSS** and **shadcn/ui**, with subtle animations via **Framer Motion**.
 
-This portfolio highlights my work in **Geospatial Programming, Environmental Data Analysis, and Urban Sustainability**.
+This portfolio presents my background as a **Data Engineer** with a focus on **geospatial, climate, and environmental data**, highlighting selected projects, skills, education, and interests.  
+Detailed professional experience is intentionally kept in the downloadable CV.
 
 ---
 
 ## 🔗 Live Demo
-> (Add after deployment)
+
+👉 https://sukanto54cl.github.io/portfolio/ 
+
+
+---
+
+## Features
+
+- Clean, minimal, recruiter-friendly design
+- Responsive layout (desktop & mobile)
+- Dark / light mode toggle
+- Downloadable CV (PDF)
+- Animated sections with Framer Motion
+- GitHub Pages deployment
 
 ---
 
 ## Tech Stack
 
 - **React (TypeScript)** — UI development
-- **Vite** — fast build & dev server
+- **Vite** — fast build tool & dev server
 - **Tailwind CSS** — utility-first styling
 - **shadcn/ui** — accessible UI components
-- **Framer Motion** — animations
-- **Lucide React** — icons
+- **Framer Motion** — subtle animations
+- **Lucide React** — icon set
 - **Radix UI Icons** — UI icons
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 portfolio/
@@ -33,9 +47,11 @@ portfolio/
 │  ├─ App.tsx            # Renders <Portfolio />
 │  ├─ main.tsx           # React entry point
 │  ├─ index.css          # Tailwind styles
-│  └─ components/ui/     # shadcn/ui components
+│  └─ components/
+│     └─ ui/             # shadcn/ui components
 ├─ public/
-│  └─ Sukanto_Das_CV.pdf # Resume
+│  ├─ cv_sukanto_das.pdf # Resume (downloadable)
+│  └─ sukanto_das.jpg    # Profile photo
 ├─ vite.config.ts
 ├─ tailwind.config.js
 ├─ tsconfig*.json
