@@ -75,6 +75,7 @@ The **content** of this portfolio (text, CV, images, and project descriptions) i
 
 ```text
 portfolio/
+├─ LICENSE
 ├─ index.html
 ├─ src/
 │  ├─ Portfolio.tsx      # Main portfolio component
@@ -90,5 +91,3 @@ portfolio/
 ├─ tailwind.config.js
 ├─ tsconfig*.json
 └─ package.json
-
----
