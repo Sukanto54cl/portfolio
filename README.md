@@ -63,13 +63,13 @@ portfolio/
 
 Clone the repository and run:
 
-```text
+```bash
 npm install
 npm run dev
 
 The site will be available at:
 
-```text
+```bash
 http://localhost:5173
 
 ---
@@ -80,11 +80,13 @@ This project is deployed using GitHub Pages.
 
 ### Build & Deploy
 
-```text
+```bash
 npm run build
 npm run deploy
 
 ---
+
+## License
 
 The **source code** of this project is licensed under the MIT License.
 
