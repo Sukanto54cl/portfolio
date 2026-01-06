@@ -2,17 +2,14 @@
 
 ## Supported Versions
 
-The following versions of this project are currently supported with security updates:
+This project is a personal portfolio website and does not use versioned releases.
 
-| Version | Supported |
-| ------- | --------- |
-| 5.1.x   | ✅ Yes    |
-| 5.0.x   | ❌ No     |
-| 4.0.x   | ✅ Yes    |
-| < 4.0   | ❌ No     |
+Only the latest code on the `main` branch is supported with security updates.
 
-Only the versions marked as supported will receive security updates.
-Users are encouraged to upgrade to a supported version to remain secure.
+| Branch        | Supported |
+| ------------- | --------- |
+| main          | ✅ Yes    |
+| Older commits | ❌ No     |
 
 ## Reporting a Vulnerability
 
@@ -20,7 +17,7 @@ Security issues are taken seriously and responsibly handled.
 
 ### How to Report
 
-If you discover a security vulnerability, please report it using one of the following methods:
+If you discover a security vulnerability, please write an email:
 
 - Email: sukantodas1993@gmail.com
 
