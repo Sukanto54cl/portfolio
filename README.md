@@ -52,6 +52,7 @@ docker run -p 8080:80 portfolio
 ```
 
 Open http://localhost:8080
+
 ---
 
 ## Local Development
