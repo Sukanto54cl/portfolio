@@ -83,6 +83,16 @@ npm run deploy
 
 ---
 
+## Features
+
+- Responsive, mobile-first design
+- Dark / Light mode
+- Smooth animations with Framer Motion
+- Downloadable resume
+- Dockerized production build with Nginx
+
+---
+
 ## License
 
 The **source code** of this project is licensed under the MIT License.
