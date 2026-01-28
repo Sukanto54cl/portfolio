@@ -34,7 +34,24 @@ Detailed professional experience is intentionally kept in the downloadable CV.
 - **Framer Motion** — subtle animations
 - **Lucide React** — icon set
 - **Radix UI Icons** — UI icons
+- Docker (Nginx, multi-stage build)
 
+---
+## Docker Development
+
+Build the image
+
+```bash
+docker build -t portfolio .
+```
+
+Run the container
+
+```bash
+docker run -p 8080:80 portfolio
+```
+
+Open http://localhost:8080
 ---
 
 ## Local Development
