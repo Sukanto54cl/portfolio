@@ -72,14 +72,11 @@ http://localhost:5173
 
 ## Deloyment
 
-This project is deployed using GitHub Pages.
+This project is automatically deployed to **GitHub Pages** using **GitHub Actions**.
 
-### Build & Deploy
+- On every push to `main`, a CI pipeline runs linting and build checks
+- If successful, the site is built with the GitHub Pages base path and deployed automatically
 
-```bash
-npm run build
-npm run deploy
-```
 
 ---
 
