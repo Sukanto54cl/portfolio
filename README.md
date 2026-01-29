@@ -16,13 +16,12 @@ Detailed professional experience is intentionally kept in the downloadable CV.
 
 ## Features
 
-- Clean, minimal, recruiter-friendly design
-- Responsive layout (desktop & mobile)
-- Dark / light mode toggle
-- Downloadable CV (PDF)
-- Animated sections with Framer Motion
-- GitHub Pages deployment
-
+- Responsive, mobile-first design
+- Dark / Light mode
+- Smooth animations with Framer Motion
+- Downloadable resume
+- Dockerized production build with Nginx
+  
 ---
 
 ## Tech Stack
@@ -76,17 +75,6 @@ This project is automatically deployed to **GitHub Pages** using **GitHub Action
 
 - On every push to `main`, a CI pipeline runs linting and build checks
 - If successful, the site is built with the GitHub Pages base path and deployed automatically
-
-
----
-
-## Features
-
-- Responsive, mobile-first design
-- Dark / Light mode
-- Smooth animations with Framer Motion
-- Downloadable resume
-- Dockerized production build with Nginx
 
 ---
 
