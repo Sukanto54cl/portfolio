@@ -1,3 +1,10 @@
+![Status](https://img.shields.io/badge/status-active-success)
+![Last Commit](https://img.shields.io/github/last-commit/Sukanto54cl/portfolio)
+![Website](https://img.shields.io/badge/website-live-brightgreen)
+![React](https://img.shields.io/badge/React-18-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-blue)
+![Deploy](https://github.com/Sukanto54cl/portfolio/actions/workflows/deploy-pages.yml/badge.svg)
+
 # Sukanto Das — Portfolio
 
 A **personal portfolio website** built with **React + Vite**, styled using **Tailwind CSS** and **shadcn/ui**, with subtle animations via **Framer Motion**.
