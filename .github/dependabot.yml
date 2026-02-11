@@ -1,12 +1,59 @@
 version: 2
+
 updates:
-  # Enable version updates for npm (Node.js)
+  # =========================
+  # NPM (Node.js dependencies)
+  # =========================
   - package-ecosystem: "npm"
-    directory: "/"  # Location of package.json
+    directory: "/"
     schedule:
-      interval: "weekly"  # daily | weekly | monthly
+      interval: "weekly"
+
+    # Ignore ESLint v10 (peer dependency conflict for now)
+    ignore:
+      - dependency-name: "eslint"
+        versions: ["10.x"]
+
+    # Group all npm updates into one PR
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
+
     open-pull-requests-limit: 5
+
     commit-message:
       prefix: "deps"
+
     labels:
       - "dependencies"
+
+
+  # =========================
+  # GitHub Actions
+  # =========================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    commit-message:
+      prefix: "ci"
+
+    labels:
+      - "github-actions"
+
+
+  # =========================
+  # Docker (if using Dockerfile)
+  # =========================
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    commit-message:
+      prefix: "docker"
+
+    labels:
+      - "docker"
