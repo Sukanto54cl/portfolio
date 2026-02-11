@@ -4,6 +4,7 @@
 ![React](https://img.shields.io/badge/React-18-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue)
 ![Deploy](https://github.com/Sukanto54cl/portfolio/actions/workflows/deploy-pages.yml/badge.svg)
+![Dependabot](https://img.shields.io/badge/dependabot-enabled-brightgreen)
 
 # Sukanto Das — Portfolio
 
