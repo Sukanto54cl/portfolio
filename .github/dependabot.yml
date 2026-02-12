@@ -15,6 +15,10 @@ updates:
         versions: ["10.x"]
       - dependency-name: "@eslint/js"
         versions: ["10.x"]
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "global"
+        update-types: ["version-update:semver-major"]
 
     # Group all npm updates into one PR
     groups:
