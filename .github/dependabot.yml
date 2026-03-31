@@ -11,13 +11,15 @@ updates:
 
     # Ignore ESLint v10 (peer dependency conflict for now)
     ignore:
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
       - dependency-name: "eslint"
         versions: ["10.x"]
       - dependency-name: "@eslint/js"
         versions: ["10.x"]
       - dependency-name: "tailwindcss"
         update-types: ["version-update:semver-major"]
-      - dependency-name: "global"
+      - dependency-name: "globals"
         update-types: ["version-update:semver-major"]
 
     # Group all npm updates into one PR
