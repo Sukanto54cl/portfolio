@@ -301,12 +301,13 @@ export default function Portfolio() {
       </header>
 
       {/* Hero */}
-      <section id="home" className="pt-12 pb-6">
+      <section id="home" className="pt-6 pb-4">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-5 gap-8 items-center">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: motionDuration(0.6) }} className="md:col-span-3">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
               Hi! I'm <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">Sukanto Das</span>
             </h1>
+            <p className="mt-2 text-base font-medium text-emerald-600 dark:text-emerald-400">{profile.tagline}</p>
             <p className="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl">
               {profile.summary}
             </p>
@@ -330,13 +331,13 @@ export default function Portfolio() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: motionDuration(0.6), delay: motionDuration(0.1) }} className="md:col-span-2">
-            <Card className="rounded-2xl overflow-hidden">
+            <Card className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
               <CardContent className="p-6">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500/20 to-cyan-500/10">
                   <img
                     src={profile.photoUrl}
                     alt="Sukanto Das"
-                    className="w-full h-full object-contain bg-slate-900"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <p className="mt-4 text-sm text-slate-400 text-center">
@@ -352,7 +353,7 @@ export default function Portfolio() {
       <Section id="skills" title="Skills" icon={<Cpu className="w-6 h-6" />}>
         <div className="grid md:grid-cols-2 gap-4">
           {Object.entries(skills).map(([cat, items]) => (
-            <Card key={cat} className="rounded-2xl">
+            <Card key={cat} className="rounded-2xl border border-slate-200 dark:border-slate-700">
               <CardHeader className="pb-2"><CardTitle className="text-base">{cat}</CardTitle></CardHeader>
               <CardContent className="flex flex-wrap gap-2">
                 {items.map((it) => (
