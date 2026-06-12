@@ -1,7 +1,7 @@
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Last Commit](https://img.shields.io/github/last-commit/Sukanto54cl/portfolio)
 ![Website](https://img.shields.io/badge/website-live-brightgreen)
-![React](https://img.shields.io/badge/React-18-blue)
+![React](https://img.shields.io/badge/React-19-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue)
 ![Deploy](https://github.com/Sukanto54cl/portfolio/actions/workflows/deploy-pages.yml/badge.svg)
 ![Dependabot](https://img.shields.io/badge/dependabot-enabled-brightgreen)
@@ -17,7 +17,7 @@ Detailed professional experience is intentionally kept in the downloadable CV.
 
 ## 🔗 Live Demo
 
-👉 https://sukanto54cl.github.io/portfolio/ 
+👉 https://sukanto54cl.github.io/portfolio/
 
 
 ---
@@ -25,11 +25,13 @@ Detailed professional experience is intentionally kept in the downloadable CV.
 ## Features
 
 - Responsive, mobile-first design
-- Dark / Light mode
-- Smooth animations with Framer Motion
+- Dark / Light mode (follows system preference)
+- Smooth animations with Framer Motion (respects `prefers-reduced-motion`)
+- SEO-ready — meta description, Open Graph, and Twitter Card tags
+- Functional contact form powered by EmailJS
 - Downloadable resume
 - Dockerized production build with Nginx
-  
+
 ---
 
 ## Tech Stack
@@ -39,6 +41,7 @@ Detailed professional experience is intentionally kept in the downloadable CV.
 - **Tailwind CSS** — utility-first styling
 - **shadcn/ui** — accessible UI components
 - **Framer Motion** — subtle animations
+- **EmailJS** — contact form backend
 - **Lucide React** — icon set
 - **Radix UI Icons** — UI icons
 - Docker (Nginx, multi-stage build)
@@ -68,16 +71,26 @@ Clone the repository and run:
 
 ```bash
 npm install
+```
+
+Copy `.env.example` to `.env.local` and fill in your EmailJS credentials (required for the contact form):
+
+```bash
+cp .env.example .env.local
+```
+
+Then start the dev server:
+
+```bash
 npm run dev
 ```
-The site will be available at:
 
-http://localhost:5173
+The site will be available at http://localhost:5173
 
 
 ---
 
-## Deloyment
+## Deployment
 
 This project is automatically deployed to **GitHub Pages** using **GitHub Actions**.
 
@@ -96,19 +109,22 @@ The **content** of this portfolio (text, CV, images, and project descriptions) i
 
 ```text
 portfolio/
-├─ LICENSE
-├─ index.html
-├─ src/
-│  ├─ Portfolio.tsx      # Main portfolio component
-│  ├─ App.tsx            # Renders <Portfolio />
-│  ├─ main.tsx           # React entry point
-│  ├─ index.css          # Tailwind styles
-│  └─ components/
-│     └─ ui/             # shadcn/ui components
-├─ public/
-│  ├─ cv_sukanto_das.pdf # Resume (downloadable)
-│  └─ sukanto_das.jpg    # Profile photo
-├─ vite.config.ts
-├─ tailwind.config.js
-├─ tsconfig*.json
-└─ package.json
+├── LICENSE
+├── index.html
+├── .env.example            # Required env vars for EmailJS
+├── src/
+│   ├── Portfolio.tsx       # Main portfolio component (all content + logic)
+│   ├── App.tsx             # Renders <Portfolio />
+│   ├── main.tsx            # React entry point
+│   ├── index.css           # Tailwind styles
+│   └── components/
+│       └── ui/             # shadcn/ui components
+├── public/
+│   ├── cv_sukanto_das.pdf  # Resume (downloadable)
+│   ├── sukanto_das.jpg     # Profile photo
+│   └── favicon.svg         # Branded SD favicon
+├── vite.config.ts
+├── tailwind.config.js
+├── tsconfig*.json
+└── package.json
+```
