@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -44,61 +45,55 @@ const profile = {
 };
 
 const skills = {
-  "Data Engineering (Python & SQL)": [
-    "ETL pipelines",
-    "Workflow automation",
-    "Reproducible processing",
-    "Data modeling",
-    "Unit-tested analytics",
-    "API ingestion",
+  "Climate & Scientific Data Processing": [
+    "Python (numpy, xarray, pandas, NetCDF4)",
+    "CDO",
+    "ERA5-Land",
+    "CORDEX",
+    "Climate extreme index computation",
+    "Reproducible scientific workflows",
   ],
-  "Geospatial ETL & Operations": [
+  "Geospatial & Environmental Analysis": [
     "GeoPandas",
+    "GDAL",
     "Rasterio",
     "Shapely",
-    "GDAL",
-    "PostGIS",
-    "DuckDB",
-    "Geospatial QA/QC",
-    "Batch processing",
-  ],
-  "Remote Sensing": [
+    "QGIS",
+    "OSM",
+    "WFS",
     "Sentinel-2",
     "Landsat",
-    "LULC classification",
-    "Change detection",
-    "Preprocessing",
-    "Feature extraction",
+    "Land-surface and land-use analysis",
+    "Remote sensing",
   ],
-  "Feasibility & Operational Analysis": [
-    "Spatial/temporal feasibility",
-    "Accessibility analysis",
-    "Pattern-of-life",
-    "Mobility mapping",
-    "Demand mapping",
+  "HPC & Infrastructure": [
+    "Linux/Bash",
+    "HPC cluster exposure",
+    "NetCDF I/O",
+    "Large-volume batch processing",
+    "Job automation",
   ],
-  "Visualization & Monitoring": [
+  "Databases & Storage": [
+    "PostgreSQL/PostGIS",
+    "DuckDB",
+    "GeoPackage",
+    "Structured and spatial data integration",
+    "FAIR-compliant data management",
+  ],
+  "Visualization & Reporting": [
     "Streamlit",
     "Plotly",
-    "Power BI",
-    "ArcGIS Online",
-    "Operational dashboards",
-    "Decision support",
+    "Data visualization",
+    "Analytical storytelling",
+    "Technical documentation for research and practice audiences",
   ],
-  "CI/CD & Version Control": [
+  "Workflow Quality": [
     "Git",
-    "GitHub Actions (familiar)",
+    "GitHub Actions",
     "Testing",
-    "Documentation",
-    "Reproducible workflows",
-  ],
-  "GIS Software & Tools": [
-    "QGIS",
-    "ArcGIS Pro / ModelBuilder",
-    "OSMnx",
-    "Overpy",
-    "FAIR metadata",
-    "SOP development",
+    "QA/QC",
+    "Metadata standards",
+    "FAIR-aligned data publication",
   ],
 };
 
@@ -210,7 +205,9 @@ const certs = [
 
 // --- Helpers ----------------------------------------------------------------
 function useDarkMode() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches
+  );
   useEffect(() => {
     const root = window.document.documentElement;
     if (dark) root.classList.add("dark");
@@ -245,8 +242,32 @@ const Pill = ({ children }: PillProps) => (
 );
 
 // --- Main component ---------------------------------------------------------
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const motionDuration = (ms: number) => (reducedMotion ? 0 : ms);
+
+type FormStatus = "idle" | "sending" | "success" | "error";
+
 export default function Portfolio() {
   const { dark, setDark } = useDarkMode();
+  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setFormStatus("sending");
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        form,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+      setFormStatus("success");
+      setForm({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setFormStatus("error");
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50">
@@ -254,6 +275,17 @@ export default function Portfolio() {
       <header className="sticky top-0 z-40 backdrop-blur border-b border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/60">
         <nav className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <a href="#home" className="font-semibold tracking-tight">Sukanto Das</a>
+          <div className="hidden md:flex items-center gap-1 text-sm text-slate-600 dark:text-slate-400">
+            {(["skills", "projects", "interests", "publications", "contact"] as const).map((id) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="px-3 py-1.5 rounded-xl capitalize hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
+              >
+                {id === "interests" ? "Education" : id.charAt(0).toUpperCase() + id.slice(1)}
+              </a>
+            ))}
+          </div>
           <div className="flex items-center gap-2">
             <a href={profile.github} target="_blank" rel="noreferrer" className="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="GitHub">
               <GitHubLogoIcon className="w-5 h-5" />
@@ -271,7 +303,7 @@ export default function Portfolio() {
       {/* Hero */}
       <section id="home" className="pt-12 pb-6">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-5 gap-8 items-center">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="md:col-span-3">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: motionDuration(0.6) }} className="md:col-span-3">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
               Hi! I'm <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">Sukanto Das</span>
             </h1>
@@ -297,7 +329,7 @@ export default function Portfolio() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="md:col-span-2">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: motionDuration(0.6), delay: motionDuration(0.1) }} className="md:col-span-2">
             <Card className="rounded-2xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500/20 to-cyan-500/10">
@@ -336,12 +368,12 @@ export default function Portfolio() {
       <Section id="projects" title="Featured Projects" icon={<Layers className="w-6 h-6" />}>
         <div className="grid md:grid-cols-2 gap-4">
           {projects.map((p, i) => (
-            <motion.div key={p.title} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
+            <motion.div key={p.title} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: motionDuration(0.4), delay: motionDuration(i * 0.05) }}>
               <Card className="rounded-2xl h-full">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg flex items-center justify-between">
                     <span>{p.title}</span>
-                    {p.link && (
+                    {p.link && p.link !== "#" && (
                       <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm font-normal hover:underline">
                         View <ExternalLink className="w-4 h-4 ml-1" />
                       </a>
@@ -464,14 +496,53 @@ export default function Portfolio() {
                   <div className="flex items-center gap-2"><GitHubLogoIcon className="w-4 h-4" /><a className="hover:underline" href={profile.github} target="_blank" rel="noreferrer">GitHub</a></div>
                 </div>
               </div>
-              <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-3" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-3">
-                  <Input placeholder="Name" required className="rounded-2xl" />
-                  <Input type="email" placeholder="Email" required className="rounded-2xl" />
+                  <Input
+                    aria-label="Name"
+                    placeholder="Name"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="rounded-2xl"
+                  />
+                  <Input
+                    aria-label="Email address"
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="rounded-2xl"
+                  />
                 </div>
-                <Input placeholder="Subject" className="rounded-2xl" />
-                <Textarea placeholder="Message" className="rounded-2xl min-h-[120px]" />
-                <Button className="rounded-2xl">Send (disabled demo)</Button>
+                <Input
+                  aria-label="Subject"
+                  placeholder="Subject"
+                  value={form.subject}
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  className="rounded-2xl"
+                />
+                <Textarea
+                  aria-label="Message"
+                  placeholder="Message"
+                  required
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="rounded-2xl min-h-[120px]"
+                />
+                {formStatus === "success" ? (
+                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">Message sent! I'll get back to you soon.</p>
+                ) : (
+                  <>
+                    {formStatus === "error" && (
+                      <p className="text-sm text-red-500">Something went wrong. Try emailing directly.</p>
+                    )}
+                    <Button className="rounded-2xl" disabled={formStatus === "sending"}>
+                      {formStatus === "sending" ? "Sending…" : "Send message"}
+                    </Button>
+                  </>
+                )}
               </form>
             </div>
           </CardContent>
