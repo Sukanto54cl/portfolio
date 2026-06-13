@@ -26,3 +26,4 @@ dist-ssr
 CLAUDE-*.log
 *.log
 CLAUDE.md
+.claude

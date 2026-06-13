@@ -1,10 +1,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import {
@@ -17,13 +15,6 @@ import {
   Sun,
   GraduationCap,
   Building2,
-  Calendar,
-  Globe2,
-  Newspaper,
-  Sparkles,
-  Layers,
-  Cpu,
-  ChartLine,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -32,7 +23,7 @@ const BASE_URL = import.meta.env.BASE_URL;
 
 const profile = {
   name: "Sukanto Das",
-  tagline: "Data Engineer • Geospatial & Climate Data",
+  tagline: "Data Engineer · Geospatial & Climate Data",
   summary:
     "A Data engineer with the experience of building reliable, reproducible data pipelines across geospatial, environmental, and remote sensing domains. Strong background in Python and SQL, spatial ETL, and scalable data processing. Interested in applying data engineering practices to climate, urban systems, and sustainability-focused problems.",
   location: "Dresden, Germany",
@@ -205,9 +196,7 @@ const certs = [
 
 // --- Helpers ----------------------------------------------------------------
 function useDarkMode() {
-  const [dark, setDark] = useState(
-    () => window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
+  const [dark, setDark] = useState(true);
   useEffect(() => {
     const root = window.document.documentElement;
     if (dark) root.classList.add("dark");
@@ -218,27 +207,22 @@ function useDarkMode() {
 
 type SectionProps = {
   id: string;
+  num: string;
   title: string;
-  icon: ReactNode;
   children: ReactNode;
 };
 
-type PillProps = { children: ReactNode };
-
-const Section = ({ id, title, icon, children }: SectionProps) => (
-  <section id={id} className="scroll-mt-24 py-10">
+const Section = ({ id, num, title, children }: SectionProps) => (
+  <section id={id} className="scroll-mt-24 py-8">
     <div className="max-w-5xl mx-auto px-4">
-      <div className="flex items-center gap-3 mb-6">
-        {icon}
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+      <div className="ds-sec-head">
+        <span className="ds-sec-num">{num}</span>
+        <h2 className="ds-sec-title">{title}</h2>
+        <div className="ds-sec-line" />
       </div>
       {children}
     </div>
   </section>
-);
-
-const Pill = ({ children }: PillProps) => (
-  <Badge className="rounded-full px-3 py-1 text-sm" variant="secondary">{children}</Badge>
 );
 
 // --- Main component ---------------------------------------------------------
@@ -270,292 +254,379 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50">
-      {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur border-b border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/60">
-        <nav className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="#home" className="font-semibold tracking-tight">Sukanto Das</a>
-          <div className="hidden md:flex items-center gap-1 text-sm text-slate-600 dark:text-slate-400">
+    <div className="min-h-screen bg-background text-foreground">
+
+      {/* ---- Header ---- */}
+      <header
+        className="sticky top-0 z-40 backdrop-blur-md border-b"
+        style={{ background: "var(--glass)", borderColor: "var(--border-ds)" }}
+      >
+        <nav className="max-w-5xl mx-auto px-4 flex items-center justify-between h-16">
+          <a href="#home" className="flex items-center gap-[11px] no-underline" style={{ textDecoration: "none" }}>
+            <div className="ds-brand-mono">SD</div>
+            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "15px", letterSpacing: "-0.01em", color: "var(--text-ds)" }}>
+              Sukanto Das
+            </span>
+          </a>
+
+          <div className="hidden md:flex items-center gap-[2px]">
             {(["skills", "projects", "interests", "publications", "contact"] as const).map((id) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className="px-3 py-1.5 rounded-xl capitalize hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors"
-              >
+              <a key={id} href={`#${id}`} className="ds-navlink">
                 {id === "interests" ? "Education" : id.charAt(0).toUpperCase() + id.slice(1)}
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-2">
-            <a href={profile.github} target="_blank" rel="noreferrer" className="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="GitHub">
-              <GitHubLogoIcon className="w-5 h-5" />
+
+          <div className="flex items-center gap-1">
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
+              className="w-[38px] h-[38px] grid place-items-center rounded-[10px] transition-colors hover:bg-[var(--surface-raised)]"
+              aria-label="GitHub"
+              style={{ color: "var(--text-muted)" }}
+            >
+              <GitHubLogoIcon className="w-[18px] h-[18px]" />
             </a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="LinkedIn">
-              <LinkedInLogoIcon className="w-5 h-5" />
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="w-[38px] h-[38px] grid place-items-center rounded-[10px] transition-colors hover:bg-[var(--surface-raised)]"
+              aria-label="LinkedIn"
+              style={{ color: "var(--text-muted)" }}
+            >
+              <LinkedInLogoIcon className="w-[18px] h-[18px]" />
             </a>
-            <button onClick={() => setDark(!dark)} className="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900" aria-label="Toggle theme">
-              {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            <button
+              onClick={() => setDark(!dark)}
+              className="w-[38px] h-[38px] grid place-items-center rounded-[10px] transition-colors hover:bg-[var(--surface-raised)]"
+              aria-label="Toggle theme"
+              style={{ color: "var(--text-muted)", background: "transparent", border: "none", cursor: "pointer" }}
+            >
+              {dark ? <Sun className="w-[18px] h-[18px]" /> : <Moon className="w-[18px] h-[18px]" />}
             </button>
           </div>
         </nav>
       </header>
 
-      {/* Hero */}
-      <section id="home" className="pt-6 pb-4">
-        <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-5 gap-8 items-center">
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: motionDuration(0.6) }} className="md:col-span-3">
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-              Hi! I'm <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">Sukanto Das</span>
+      {/* ---- Hero ---- */}
+      <section id="home" className="hero-contour scroll-mt-24" style={{ padding: "72px 0 56px" }}>
+        <div className="max-w-5xl mx-auto px-4 relative z-10 grid md:grid-cols-[1.55fr_1fr] gap-[52px] items-center">
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: motionDuration(0.6) }}
+          >
+            <span className="ds-status">
+              <span className="ds-dot" />
+              Open to data &amp; geospatial roles
+            </span>
+
+            <h1 className="ds-hero-title">
+              Hi, I'm<br />
+              <span className="ds-accent">Sukanto Das</span>.
             </h1>
-            <p className="mt-2 text-base font-medium text-emerald-600 dark:text-emerald-400">{profile.tagline}</p>
-            <p className="mt-4 text-slate-600 dark:text-slate-300 max-w-2xl">
-              {profile.summary}
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={`mailto:${profile.email}`}>
-                <Button size="lg" className="rounded-2xl">
-                  <Mail className="w-4 h-4 mr-2" /> Contact
+
+            <p className="ds-hero-tagline">{profile.tagline}</p>
+
+            <p className="ds-hero-summary">{profile.summary}</p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="#contact">
+                <Button
+                  size="lg"
+                  className="rounded-[11px] h-[50px] px-6 font-semibold"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
+                  <Mail className="w-4 h-4 mr-2" /> Get in touch
                 </Button>
               </a>
               <a href={profile.resumeUrl} target="_blank" rel="noreferrer">
-                <Button size="lg" variant="secondary" className="rounded-2xl">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="rounded-[11px] h-[50px] px-6 font-semibold"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                >
                   <Download className="w-4 h-4 mr-2" /> Download CV
                 </Button>
               </a>
             </div>
-            <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500 dark:text-slate-400">
-              <span className="inline-flex items-center gap-1"><MapPin className="w-4 h-4" /> {profile.location}</span>
-              <span className="inline-flex items-center gap-1"><Phone className="w-4 h-4" /> {profile.phone}</span>
-              <span className="inline-flex items-center gap-1"><Globe2 className="w-4 h-4" /> Open to: Data/Geo roles</span>
+
+            <div className="ds-meta-row mt-[26px]">
+              <span className="inline-flex items-center gap-[7px]">
+                <MapPin className="w-[14px] h-[14px]" style={{ color: "var(--text-subtle)" }} />
+                {profile.location}
+              </span>
+              <span className="inline-flex items-center gap-[7px]">
+                <Phone className="w-[14px] h-[14px]" style={{ color: "var(--text-subtle)" }} />
+                {profile.phone}
+              </span>
+              <span className="inline-flex items-center gap-[7px]">
+                <GraduationCap className="w-[14px] h-[14px]" style={{ color: "var(--text-subtle)" }} />
+                M.Sc. TU Dresden
+              </span>
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: motionDuration(0.6), delay: motionDuration(0.1) }} className="md:col-span-2">
-            <Card className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
-              <CardContent className="p-6">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-500/20 to-cyan-500/10">
-                  <img
-                    src={profile.photoUrl}
-                    alt="Sukanto Das"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <p className="mt-4 text-sm text-slate-400 text-center">
-                  Data Engineer focused on climate, geospatial, remote sensing, and sustainability
-                </p>
-              </CardContent>
-            </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: motionDuration(0.6), delay: motionDuration(0.1) }}
+          >
+            <div className="ds-photo-card">
+              <div className="ds-photo-frame">
+                <img src={profile.photoUrl} alt="Sukanto Das" />
+              </div>
+              <div className="ds-photo-tagbar">
+                <span className="ds-pill">Geo · Climate · RS</span>
+                <span className="ds-pill">Dresden ◷ CET</span>
+              </div>
+            </div>
           </motion.div>
+
         </div>
       </section>
 
-      {/* Skills */}
-      <Section id="skills" title="Skills" icon={<Cpu className="w-6 h-6" />}>
+      {/* ---- Skills ---- */}
+      <Section id="skills" num="01" title="Skills">
         <div className="grid md:grid-cols-2 gap-4">
           {Object.entries(skills).map(([cat, items]) => (
-            <Card key={cat} className="rounded-2xl border border-slate-200 dark:border-slate-700">
-              <CardHeader className="pb-2"><CardTitle className="text-base">{cat}</CardTitle></CardHeader>
-              <CardContent className="flex flex-wrap gap-2">
+            <div key={cat} className="ds-card interactive">
+              <span className="ds-eyebrow">{cat}</span>
+              <div className="flex flex-wrap gap-2 mt-3">
                 {items.map((it) => (
-                  <Pill key={it}>{it}</Pill>
+                  <span key={it} className="ds-tag">{it}</span>
                 ))}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </Section>
 
-      {/* Projects */}
-      <Section id="projects" title="Featured Projects" icon={<Layers className="w-6 h-6" />}>
+      {/* ---- Projects ---- */}
+      <Section id="projects" num="02" title="Featured Projects">
         <div className="grid md:grid-cols-2 gap-4">
           {projects.map((p, i) => (
-            <motion.div key={p.title} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: motionDuration(0.4), delay: motionDuration(i * 0.05) }}>
-              <Card className="rounded-2xl h-full">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg flex items-center justify-between">
-                    <span>{p.title}</span>
-                    {p.link && p.link !== "#" && (
-                      <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center text-sm font-normal hover:underline">
-                        View <ExternalLink className="w-4 h-4 ml-1" />
-                      </a>
-                    )}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
-                    <span className="inline-flex items-center gap-1"><Building2 className="w-4 h-4" /> {p.org}</span>
-                    <span className="mx-2">•</span>
-                    <span className="inline-flex items-center gap-1"><Calendar className="w-4 h-4" /> {p.dates}</span>
-                  </div>
-                  <p className="text-slate-700 dark:text-slate-300 mb-3">{p.blurb}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.stack.map((t) => (
-                      <Pill key={t}>{t}</Pill>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: motionDuration(0.4), delay: motionDuration(i * 0.05) }}
+              className="ds-card interactive"
+            >
+              <div className="flex items-start justify-between gap-3">
+                <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "18px", letterSpacing: "-0.015em", color: "var(--text-ds)", margin: 0 }}>
+                  {p.title}
+                </h3>
+                {p.link && p.link !== "#" && (
+                  <a href={p.link} target="_blank" rel="noreferrer" className="ds-viewlink">
+                    DOI <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-[6px_16px] mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11.5px", color: "var(--text-muted)" }}>
+                <span className="inline-flex items-center gap-[6px]">
+                  <Building2 className="w-3 h-3" style={{ color: "var(--text-subtle)" }} />
+                  {p.org}
+                </span>
+                <span>{p.dates}</span>
+              </div>
+              <p className="mt-[10px] text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                {p.blurb}
+              </p>
+              <div className="flex flex-wrap gap-2 mt-[14px]">
+                {p.stack.map((t) => (
+                  <span key={t} className="ds-tag">{t}</span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>
       </Section>
 
-      
-      {/* Education & Interests */}
-    <Section id="interests" title="Education & Interests" icon={<ChartLine className="w-6 h-6" />}>
-    <Tabs defaultValue="edu" className="w-full">
-        <TabsList className="rounded-2xl">
-        <TabsTrigger value="edu">Education</TabsTrigger>
-        <TabsTrigger value="interests">Interests</TabsTrigger>
-        </TabsList>
+      {/* ---- Education & Interests ---- */}
+      <Section id="interests" num="03" title="Education & Interests">
+        <Tabs defaultValue="edu" className="w-full">
+          <TabsList
+            className="rounded-[11px] p-1"
+            style={{ background: "var(--surface-sunken)", border: "1px solid var(--border-ds)" }}
+          >
+            <TabsTrigger value="edu" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Education</TabsTrigger>
+            <TabsTrigger value="interests" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>Interests</TabsTrigger>
+          </TabsList>
 
-        {/* Education FIRST */}
-        <TabsContent value="edu" className="mt-4">
-        <div className="grid md:grid-cols-2 gap-4">
-            {education.map((ed) => (
-            <Card key={ed.degree} className="rounded-2xl">
-                <CardHeader className="pb-2">
-                <CardTitle className="text-lg flex items-start gap-2">
-                    <GraduationCap className="w-5 h-5 mt-0.5" />
-                    {ed.degree}
-                </CardTitle>
-                </CardHeader>
-                <CardContent>
-                <div className="text-sm text-slate-500 dark:text-slate-400 mb-2">
-                    {ed.school}
+          <TabsContent value="edu" className="mt-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              {education.map((ed) => (
+                <div key={ed.degree} className="ds-card">
+                  <span className="ds-eyebrow">
+                    {ed.degree.startsWith("M.Sc") ? "M.Sc." : "B.URP"}
+                  </span>
+                  <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "18px", letterSpacing: "-0.015em", color: "var(--text-ds)", marginTop: "4px" }}>
+                    {ed.degree.startsWith("M.Sc") ? "Hydro Science & Engineering" : "Urban & Regional Planning"}
+                  </h3>
+                  <p className="mt-[10px] text-sm" style={{ color: "var(--text-muted)" }}>{ed.school}</p>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{ed.details}</p>
                 </div>
-                <p>{ed.details}</p>
-                </CardContent>
-            </Card>
-            ))}
-        </div>
-        </TabsContent>
-
-        {/* Interests SECOND */}
-        <TabsContent value="interests" className="mt-4">
-        <Card className="rounded-2xl">
-            <CardContent className="p-6">
-            <div className="flex flex-wrap gap-2">
-                {interests.map((it) => (
-                <Pill key={it}>{it}</Pill>
-                ))}
+              ))}
             </div>
-            <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
-                I enjoy building reliable data pipelines and spatial models that turn
-                complex geospatial and Earth observation data into decision-ready insights.
-            </p>
-            </CardContent>
-        </Card>
-        </TabsContent>
-    </Tabs>
-    </Section>
+          </TabsContent>
 
-      {/* Publications & Certifications */}
-      <Section id="publications" title="Publications & Certifications" icon={<Newspaper className="w-6 h-6" />}>
+          <TabsContent value="interests" className="mt-4">
+            <div className="ds-card">
+              <div className="flex flex-wrap gap-2">
+                {interests.map((it) => (
+                  <span key={it} className="ds-tag">{it}</span>
+                ))}
+              </div>
+              <p className="mt-[14px] text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                I enjoy building reliable data pipelines and spatial models that turn complex geospatial and Earth-observation data into decision-ready insight.
+              </p>
+            </div>
+          </TabsContent>
+        </Tabs>
+      </Section>
+
+      {/* ---- Publications & Certifications ---- */}
+      <Section id="publications" num="04" title="Publications & Certifications">
         <div className="grid md:grid-cols-2 gap-4">
-          <Card className="rounded-2xl">
-            <CardHeader className="pb-2"><CardTitle className="text-lg">Publications</CardTitle></CardHeader>
-            <CardContent>
-              <ul className="space-y-3">
-                {publications.map((p) => (
-                  <li key={p.title} className="text-sm">
-                    <div className="font-medium">{p.title}</div>
-                    <div className="text-slate-500 dark:text-slate-400">{p.authors} • {p.venue} ({p.year})</div>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+          <div className="ds-card">
+            <span className="ds-eyebrow">Publications</span>
+            <ul className="mt-3 space-y-3">
+              {publications.map((p) => (
+                <li key={p.title} className="text-sm" style={{ color: "var(--text-muted)" }}>
+                  <div style={{ fontWeight: 500, color: "var(--text-ds)" }}>{p.title}</div>
+                  <div className="mt-1">{p.authors} · {p.venue} ({p.year})</div>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <Card className="rounded-2xl">
-            <CardHeader className="pb-2"><CardTitle className="text-lg">Certifications</CardTitle></CardHeader>
-            <CardContent>
-              <ul className="space-y-3">
-                {certs.map((c) => (
-                  <li key={c.title} className="text-sm">
-                    <div className="font-medium">{c.title}</div>
-                    <div className="text-slate-500 dark:text-slate-400">{c.org} ({c.year}) — {c.note}</div>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+          <div className="ds-card">
+            <span className="ds-eyebrow">Certifications</span>
+            <ul className="mt-3 space-y-3">
+              {certs.map((c) => (
+                <li key={c.title} className="text-sm" style={{ color: "var(--text-muted)" }}>
+                  <div style={{ fontWeight: 500, color: "var(--text-ds)" }}>{c.title}</div>
+                  <div className="mt-1">{c.org} ({c.year}) — {c.note}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Section>
 
-      {/* Contact */}
-      <Section id="contact" title="Get in touch" icon={<Sparkles className="w-6 h-6" />}>
-        <Card className="rounded-2xl">
-          <CardContent className="p-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold">Let’s build climate‑positive cities with data</h3>
-                <p className="text-slate-600 dark:text-slate-300 mt-2">Email me or connect via LinkedIn/GitHub. I’m open to geospatial, data engineering, and urban sustainability roles.</p>
-                <div className="mt-4 space-y-2 text-sm">
-                  <div className="flex items-center gap-2"><Mail className="w-4 h-4" /><a className="hover:underline" href={`mailto:${profile.email}`}>{profile.email}</a></div>
-                  <div className="flex items-center gap-2"><LinkedInLogoIcon className="w-4 h-4" /><a className="hover:underline" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></div>
-                  <div className="flex items-center gap-2"><GitHubLogoIcon className="w-4 h-4" /><a className="hover:underline" href={profile.github} target="_blank" rel="noreferrer">GitHub</a></div>
-                </div>
+      {/* ---- Contact ---- */}
+      <Section id="contact" num="05" title="Get in touch">
+        <div className="ds-card">
+          <div className="grid md:grid-cols-2 gap-9">
+            <div>
+              <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "22px", letterSpacing: "-0.015em", color: "var(--text-ds)" }}>
+                Let's build climate‑positive cities with data.
+              </h3>
+              <p className="mt-[10px] text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                Open to geospatial, data-engineering and urban-sustainability roles. Email me or connect on LinkedIn / GitHub.
+              </p>
+              <div className="mt-[22px] flex flex-col gap-[13px]">
+                <a className="ds-infolink" href={`mailto:${profile.email}`}>
+                  <Mail className="w-[15px] h-[15px]" style={{ color: "var(--emerald-400)" }} />
+                  {profile.email}
+                </a>
+                <a className="ds-infolink" href={profile.linkedin} target="_blank" rel="noreferrer">
+                  <LinkedInLogoIcon className="w-[15px] h-[15px]" style={{ color: "var(--emerald-400)" }} />
+                  linkedin.com/in/sukanto-das
+                </a>
+                <a className="ds-infolink" href={profile.github} target="_blank" rel="noreferrer">
+                  <GitHubLogoIcon className="w-[15px] h-[15px]" style={{ color: "var(--emerald-400)" }} />
+                  github.com/Sukanto54cl
+                </a>
               </div>
-              <form className="space-y-3" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-2 gap-3">
+            </div>
+
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div className="grid grid-cols-2 gap-[14px]">
+                <div className="flex flex-col gap-[7px]">
+                  <label className="ds-field-label">Name</label>
                   <Input
                     aria-label="Name"
-                    placeholder="Name"
+                    placeholder="Jane Mapper"
                     required
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="rounded-2xl"
+                    className="rounded-[10px]"
                   />
+                </div>
+                <div className="flex flex-col gap-[7px]">
+                  <label className="ds-field-label">Email</label>
                   <Input
                     aria-label="Email address"
                     type="email"
-                    placeholder="Email"
+                    placeholder="you@domain.com"
                     required
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="rounded-2xl"
+                    className="rounded-[10px]"
                   />
                 </div>
+              </div>
+              <div className="flex flex-col gap-[7px]">
+                <label className="ds-field-label">Subject</label>
                 <Input
                   aria-label="Subject"
-                  placeholder="Subject"
+                  placeholder="Collaboration on a climate pipeline"
                   value={form.subject}
                   onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  className="rounded-2xl"
+                  className="rounded-[10px]"
                 />
+              </div>
+              <div className="flex flex-col gap-[7px]">
+                <label className="ds-field-label">Message</label>
                 <Textarea
                   aria-label="Message"
-                  placeholder="Message"
+                  placeholder="Tell me about the role or project…"
                   required
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="rounded-2xl min-h-[120px]"
+                  className="rounded-[10px] min-h-[110px]"
                 />
-                {formStatus === "success" ? (
-                  <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">Message sent! I'll get back to you soon.</p>
-                ) : (
-                  <>
-                    {formStatus === "error" && (
-                      <p className="text-sm text-red-500">Something went wrong. Try emailing directly.</p>
-                    )}
-                    <Button className="rounded-2xl" disabled={formStatus === "sending"}>
-                      {formStatus === "sending" ? "Sending…" : "Send message"}
-                    </Button>
-                  </>
-                )}
-              </form>
-            </div>
-          </CardContent>
-        </Card>
+              </div>
+              {formStatus === "success" ? (
+                <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "13px", color: "var(--emerald-400)" }}>
+                  ✓ Message sent — I'll get back to you soon.
+                </p>
+              ) : (
+                <>
+                  {formStatus === "error" && (
+                    <p className="text-sm text-red-500">Something went wrong. Try emailing directly.</p>
+                  )}
+                  <Button
+                    className="w-full rounded-[11px] h-[50px] font-semibold"
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    disabled={formStatus === "sending"}
+                  >
+                    {formStatus === "sending" ? "Sending…" : "Send message"}
+                  </Button>
+                </>
+              )}
+            </form>
+          </div>
+        </div>
       </Section>
 
-      {/* Footer */}
-      <footer className="py-10 border-t border-slate-200/60 dark:border-slate-800/60">
-        <div className="max-w-5xl mx-auto px-4 text-sm text-slate-500 dark:text-slate-400">
-          © {new Date().getFullYear()} {profile.name}. Built with React, Tailwind, and shadcn/ui.
+      {/* ---- Footer ---- */}
+      <footer className="border-t mt-2 py-7" style={{ borderColor: "var(--border-ds)" }}>
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="ds-foot">
+            <span>© {new Date().getFullYear()} Sukanto Das</span>
+            <span>Dresden · Built on the SD Design System</span>
+          </div>
         </div>
       </footer>
+
     </div>
   );
 }
