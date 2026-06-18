@@ -308,6 +308,18 @@ export default function Portfolio() {
             </button>
           </div>
         </nav>
+
+        {/* Mobile nav strip — hidden on md+ */}
+        <div
+          className="md:hidden flex gap-1 px-3 py-1 overflow-x-auto border-t"
+          style={{ borderColor: "var(--border-ds)", scrollbarWidth: "none" }}
+        >
+          {(["skills", "projects", "interests", "publications", "contact"] as const).map((id) => (
+            <a key={id} href={`#${id}`} className="ds-navlink whitespace-nowrap flex-shrink-0">
+              {id === "interests" ? "Education" : id.charAt(0).toUpperCase() + id.slice(1)}
+            </a>
+          ))}
+        </div>
       </header>
 
       {/* ---- Hero ---- */}
