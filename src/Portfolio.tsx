@@ -105,6 +105,28 @@ const education = [
 
 const projects = [
   {
+    title: "Tropical Nights across Europe (TR20, 1990–2025)",
+    org: "Personal Project",
+    dates: "Aug 2026",
+    blurb:
+      "Built a reproducible climate pipeline computing the TR20 tropical-nights index (Tmin > 20 °C) over Europe from AgERA5 daily grids on Google Earth Engine. Derived spell length, seasonal timing, 1991–2020 anomalies and per-cell trends, then published annual NetCDF grids, decade maps, per-country zonal statistics and an interactive D3 infographic.",
+    stack: [
+      "Google Earth Engine",
+      "AgERA5",
+      "xarray",
+      "Dask",
+      "NumPy",
+      "GeoPandas",
+      "Cartopy",
+      "Matplotlib",
+      "D3.js",
+      "TopoJSON",
+    ],
+    link: "https://tropical-nights-europe.netlify.app/",
+    linkLabel: "Demo",
+    repo: "https://github.com/Sukanto54cl/tropical-nights-europe",
+  },
+  {
     title: "Urban Public Transit Frequency Indicator for Germany",
     org: "IOER Research Data Center",
     dates: "2022 – 2025",
@@ -434,11 +456,18 @@ export default function Portfolio() {
                 <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: "18px", letterSpacing: "-0.015em", color: "var(--text-ds)", margin: 0 }}>
                   {p.title}
                 </h3>
-                {p.link && p.link !== "#" && (
-                  <a href={p.link} target="_blank" rel="noreferrer" className="ds-viewlink">
-                    DOI <ExternalLink className="w-3 h-3" />
-                  </a>
-                )}
+                <div className="flex items-center gap-3 shrink-0">
+                  {p.link && p.link !== "#" && (
+                    <a href={p.link} target="_blank" rel="noreferrer" className="ds-viewlink">
+                      {p.linkLabel ?? "DOI"} <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                  {p.repo && (
+                    <a href={p.repo} target="_blank" rel="noreferrer" className="ds-viewlink">
+                      Code <GitHubLogoIcon className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
               </div>
               <div className="flex flex-wrap gap-[6px_16px] mt-2" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11.5px", color: "var(--text-muted)" }}>
                 <span className="inline-flex items-center gap-[6px]">
